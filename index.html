@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DarkOps - Operational Intelligence OS Terminal Access">
+    <title>DarkOps Terminal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #00ff00;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .terminal {
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+
+        .terminal-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            margin-top: -50px;
+        }
+
+        .terminal-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: auto;
+        }
+
+        .ascii-art {
+            color: #00aa00;
+            font-size: 12px;
+            white-space: pre;
+            margin-bottom: 30px;
+        }
+
+        .prompt-line {
+            color: #00ff00;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .terminal-input {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
+
+        .cursor {
+            display: inline-block;
+            background-color: #00ff00;
+            width: 8px;
+            height: 18px;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+            vertical-align: top;
+            margin-top: 2px;
+        }
+
+        .input-display {
+            color: #00ff00;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 16px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .output {
+            color: #ff4444;
+            margin: 10px 0;
+            min-height: 20px;
+            text-align: center;
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666666;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .command-history {
+            color: #888888;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-align: left;
+            max-width: 600px;
+            align-self: flex-start;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 12px;
+            }
+            
+            .terminal {
+                padding: 10px;
+            }
+            
+            .ascii-art {
+                font-size: 10px;
+            }
+            
+            .terminal-input {
+                width: 250px;
+                font-size: 14px;
+            }
+            
+            .prompt-line {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .terminal-input {
+                width: 200px;
+                font-size: 12px;
+            }
+            
+            .ascii-art {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-content">
+            <div class="terminal-section">
+                <div class="content-container">
+                    <div class="ascii-art">
+██████╗  █████╗ ██████╗ ██╗  ██╗ ██████╗ ██████╗ ███████╗
+██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝██╔═══██╗██╔══██╗██╔════╝
+██║  ██║███████║██████╔╝█████╔╝ ██║   ██║██████╔╝███████╗
+██║  ██║██╔══██║██╔══██╗██╔═██╗ ██║   ██║██╔═══╝ ╚════██║
+██████╔╝██║  ██║██║  ██║██║  ██╗╚██████╔╝██║     ███████║
+╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚══════╝
+                    </div>
+
+                    <div class="command-history" id="commandHistory"></div>
+                    
+                    <div class="prompt-line">Enter access code: <span class="input-display" id="inputDisplay"></span><span class="cursor" id="cursor"></span><span class="input-container"><input type="text" class="terminal-input" id="terminalInput" autocomplete="off" spellcheck="false"></span></div>
+                </div>
+                
+                <div class="output" id="output"></div>
+            </div>
+        </div>
+
+        <div class="hint">
+            © 2025 DarkOps.ai Operational Intelligence Redefined.
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('terminalInput');
+        const output = document.getElementById('output');
+        const commandHistory = document.getElementById('commandHistory');
+        const inputDisplay = document.getElementById('inputDisplay');
+        let attempts = 0;
+
+        const _0x4d2f = [121,99,50,48,50,53];
+        const _0x8a7b = [109,97,105,110,46,104,116,109,108];
+        const _0x1e9c = String.fromCharCode;
+        const _0x6f8d = (arr) => arr.map(n => _0x1e9c(n)).join('');
+        
+        const _0x3b4a = [65,67,67,69,83,83,32,68,69,78,73,69,68,58,32,79,117,116,100,97,116,101,100,32,97,99,99,101,115,115,32,112,114,111,116,111,99,111,108];
+        const _0x7c2e = [65,67,67,69,83,83,32,68,69,78,73,69,68,58,32,83,116,97,110,100,97,114,100,32,112,114,111,116,111,99,111,108,115,32,105,110,115,117,102,102,105,99,105,101,110,116];
+        const _0x9d5f = [65,67,67,69,83,83,32,68,69,78,73,69,68,58,32,65,100,109,105,110,105,115,116,114,97,116,105,118,101,32,97,99,99,101,115,115,32,114,101,113,117,105,114,101,115,32,111,112,101,114,97,116,105,111,110,97,108,32,117,110,100,101,114,115,116,97,110,100,105,110,103];
+        const _0x2a8c = [65,67,67,69,83,83,32,68,69,78,73,69,68,58,32,68,105,114,101,99,116,32,110,97,109,105,110,103,32,99,111,110,118,101,110,116,105,111,110,115,32,102,108,97,103,103,101,100];
+        
+        const responses = {};
+        responses[_0x6f8d(_0x4d2f)] = () => window.location.href = _0x6f8d(_0x8a7b);
+        responses['context'] = _0x6f8d(_0x3b4a);
+        responses['intelligence'] = _0x6f8d(_0x3b4a);
+        responses['operational-context'] = _0x6f8d(_0x3b4a);
+        responses['help'] = _0x6f8d(_0x7c2e);
+        responses['admin'] = _0x6f8d(_0x9d5f);
+        responses['login'] = _0x6f8d(_0x9d5f);
+        responses['darkops'] = _0x6f8d(_0x2a8c);
+
+        function processCommand(command) {
+            const cmd = command.toLowerCase().trim();
+            
+            commandHistory.innerHTML += `<div>> ${command}</div>`;
+            inputDisplay.textContent = '';
+            
+            if (responses[cmd]) {
+                if (typeof responses[cmd] === 'function') {
+                    responses[cmd]();
+                    return;
+                } else {
+                    output.textContent = responses[cmd];
+                }
+            } else if (cmd === '') {
+                output.textContent = '';
+                return;
+            } else {
+                output.textContent = 'COMMAND NOT RECOGNIZED: Try again';
+            }
+            
+            attempts++;
+            if (attempts > 3 && Math.random() > 0.7) {
+                setTimeout(() => {
+                    output.textContent += '\n\nSYSTEM HINT: Operations require situational awareness...';
+                }, 2000);
+            }
+        }
+
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const command = input.value;
+                input.value = '';
+                processCommand(command);
+            }
+        });
+
+        input.addEventListener('input', function() {
+            if (input.value.length > 30) {
+                input.value = input.value.substring(0, 30);
+            }
+            inputDisplay.textContent = input.value;
+        });
+
+        // Auto-focus on input
+        input.focus();
+        
+        // Maintain focus
+        document.addEventListener('click', () => {
+            input.focus();
+        });
+
+        // Handle mobile keyboard
+        input.addEventListener('blur', function() {
+            setTimeout(() => {
+                input.focus();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
