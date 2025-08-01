@@ -26,6 +26,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
         }
 
         header {
@@ -67,12 +68,86 @@
         }
 
         main {
-            padding: 4rem 0;
+            padding: 6rem 0;
+            overflow: hidden;
         }
 
         .hero {
             text-align: center;
             margin-bottom: 4rem;
+        }
+
+
+        .hero-orb {
+            position: absolute;
+            top: -250px;
+            right: -250px;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(151, 252, 193, 0.15) 0%, rgba(151, 252, 193, 0.05) 100%);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            z-index: -1;
+            animation: morphOrb 35s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(151, 252, 193, 0.08);
+        }
+
+        .hero-orb-small {
+            position: absolute;
+            top: 320px;
+            left: -200px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(151, 252, 193, 0.1) 0%, rgba(151, 252, 193, 0.03) 100%);
+            border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+            z-index: -1;
+            animation: morphOrbSmall 25s ease-in-out infinite reverse;
+            box-shadow: 0 0 8px rgba(151, 252, 193, 0.03);
+        }
+
+        @keyframes morphOrb {
+            0% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                transform: rotate(0deg);
+            }
+            25% {
+                border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+                transform: rotate(90deg);
+            }
+            50% {
+                border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+                transform: rotate(180deg);
+            }
+            75% {
+                border-radius: 25% 75% 42% 58% / 24% 76% 54% 46%;
+                transform: rotate(270deg);
+            }
+            100% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes morphOrbSmall {
+            0% {
+                border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+                transform: rotate(0deg);
+            }
+            25% {
+                border-radius: 42% 58% 25% 75% / 46% 76% 24% 54%;
+                transform: rotate(90deg);
+            }
+            50% {
+                border-radius: 67% 33% 50% 50% / 27% 55% 45% 73%;
+                transform: rotate(180deg);
+            }
+            75% {
+                border-radius: 75% 25% 58% 42% / 76% 24% 46% 54%;
+                transform: rotate(270deg);
+            }
+            100% {
+                border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+                transform: rotate(360deg);
+            }
         }
 
         .hero h1 {
@@ -150,7 +225,7 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 16px;
             padding: 3rem;
-            margin-top: 4rem;
+            margin-top: 14rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
@@ -232,10 +307,24 @@
             padding: 2rem 0;
             text-align: center;
             color: #666;
-            margin-top: 4rem;
+            margin-top: 0rem;
         }
 
         @media (max-width: 768px) {
+            .hero-orb {
+                width: 350px;
+                height: 350px;
+                top: -175px;
+                right: -175px;
+            }
+
+            .hero-orb-small {
+                width: 200px;
+                height: 200px;
+                top: 160px;
+                left: -150px;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -306,6 +395,8 @@
 
     <main>
         <div class="container">
+            <div class="hero-orb"></div>
+            <div class="hero-orb-small"></div>
             <section class="hero">
                 <h1>DarkOps</h1>
                 <div class="subtitle">Operational Intelligence OS</div>
