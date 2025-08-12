@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="DarkOps Demo - Coming Soon">
     <link rel="icon" type="image/png" href="DarkOps_icon_mint.png">
-    <title>DarkOps Demo - Coming Soon</title>
+    <title>DarkOps Demos</title>
     <style>
         * {
             margin: 0;
@@ -82,26 +82,23 @@
 
         .demo-content {
             text-align: center;
-            max-width: 600px;
+            max-width: 1000px;
         }
 
-        .demo-status {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid #97fcc1;
-            border-radius: 16px;
-            padding: 3rem;
-            margin-bottom: 3rem;
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
-        .demo-status h1 {
-            font-size: 2.5rem;
+        .hero-section h1 {
+            font-size: 3rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            color: #97fcc1;
+            color: #ffffff;
         }
 
-        .demo-status p {
-            font-size: 1.2rem;
+        .hero-section .subtitle {
+            font-size: 1.3rem;
             color: #ccc;
             margin-bottom: 2rem;
             line-height: 1.8;
@@ -111,9 +108,9 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255, 165, 0, 0.1);
-            border: 1px solid #ffa500;
-            color: #ffa500;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #97fcc1;
+            color: #97fcc1;
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -123,7 +120,7 @@
         .status-dot {
             width: 8px;
             height: 8px;
-            background: #ffa500;
+            background: #97fcc1;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -131,6 +128,47 @@
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-4px);
+            border-color: #97fcc1;
+            box-shadow: 0 10px 30px rgba(151, 252, 193, 0.1);
+        }
+
+        .demo-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #97fcc1;
+        }
+
+        .demo-card p {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .demo-card .btn {
+            width: 100%;
+            text-align: center;
         }
 
         .email-section {
@@ -254,15 +292,23 @@
         }
 
         @media (max-width: 768px) {
-            .demo-status h1 {
+            .demos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hero-section h1 {
                 font-size: 2rem;
             }
 
-            .demo-status p {
+            .hero-section .subtitle {
                 font-size: 1rem;
             }
 
-            .demo-status,
+            .demo-card {
+                padding: 2rem 1rem;
+            }
+
             .email-section {
                 padding: 2rem 1rem;
             }
@@ -277,7 +323,7 @@
                 padding: 0 15px;
             }
 
-            .demo-status h1 {
+            .hero-section h1 {
                 font-size: 1.8rem;
             }
 
@@ -285,7 +331,7 @@
                 padding: 2rem 0;
             }
 
-            .demo-status,
+            .demo-card,
             .email-section {
                 padding: 1.5rem 1rem;
             }
@@ -316,24 +362,34 @@
     <main>
         <div class="container">
             <div class="demo-content">
-                <div class="demo-status">
+                <div class="hero-section">
                     <div class="status-indicator">
                         <span class="status-dot"></span>
-                        In Development
+                        Live Demos Available
                     </div>
                     
-                    <h1>Demo Available Soon</h1>
-                    <p>
-                        Our operational intelligence system is undergoing final calibration. 
-                        The demo will showcase real-time decision analysis and operational awareness.
-                    </p>
-                    <p>
-                        <strong>You'll be notified first</strong> when the system is ready for demonstration.
+                    <h1>DarkOps Demos</h1>
+                    <p class="subtitle">
+                        Experience operational intelligence in action.
                     </p>
                 </div>
 
+                <div class="demos-grid">
+                    <div class="demo-card">
+                        <h3>Mission Analyst in Action</h3>
+                        <p>See how operational tasks get done ridiculously fast with DarkOps, then watch the system analyze completed directives and extract insights.</p>
+                        <a href="Mission-Analyst-Demo.mp4" class="btn btn-primary" target="_blank">Watch Demo</a>
+                    </div>
+                    
+                    <div class="demo-card">
+                        <h3>Closing the Loop with IntelOps</h3>
+                        <p>Watch DarkOps use an IntelOps Expert to surgically update its own architecture and improve future operations.</p>
+                        <a href="IntelOps-Expert-Demo.mp4" class="btn btn-primary" target="_blank">Watch Demo</a>
+                    </div>
+                </div>
+
                 <div class="email-section">
-                    <h2>Get Notified First</h2>
+                    <h2>Request Early Access</h2>
                     <p>Be the first to experience the future of operational intelligence</p>
                     
                     <form class="email-form" id="emailForm" action="https://formspree.io/f/mwpqqzao" method="POST">
@@ -347,13 +403,13 @@
                             <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Request Early Access</button>
+                        <button type="submit" class="btn btn-primary">Request Full Access</button>
                         
                         <a href="main.html" class="btn btn-secondary">Back to Home</a>
                     </form>
                     
                     <div class="success-message" id="successMessage">
-                        Thanks! You'll be notified when the demo is ready
+                        Thanks! We'll contact you about full system access
                     </div>
                     
                     <div class="error-message" id="errorMessage">
